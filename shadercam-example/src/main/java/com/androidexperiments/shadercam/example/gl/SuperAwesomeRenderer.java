@@ -16,7 +16,8 @@ public class SuperAwesomeRenderer extends CameraRenderer {
     private float mTileAmount = 1.f;
 
     public SuperAwesomeRenderer(Context context, SurfaceTexture texture, int width, int height) {
-        super(context, texture, width, height, "superawesome.frag.glsl", "superawesome.vert.glsl");
+        super(context, texture, width, height);
+//        super(context, texture, width, height, "superawesome.frag.glsl", "superawesome.vert.glsl");
     }
 
     @Override

@@ -379,6 +379,7 @@ public class CameraRenderer extends Thread implements SurfaceTexture.OnFrameAvai
         mMediaRecorder.setVideoSize(VIDEO_WIDTH, VIDEO_HEIGHT);
         mMediaRecorder.setVideoFrameRate(30);
 
+
         //setup audio
         mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
         mMediaRecorder.setAudioEncodingBitRate(44800);

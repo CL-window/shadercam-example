@@ -119,6 +119,10 @@ public class CameraFragment extends Fragment {
 
     /**
      * A {@link Semaphore} to prevent the app from exiting before closing the camera.
+     * 在创建Semaphore类的对象时指定资源的可用数,
+     * 通过acquire方法以阻塞式的方式获取许可,
+     * tryAcquire方法以非阻塞式的方式来获取许可
+     * 当需要释放许可时,使用release方法
      */
     private Semaphore mCameraOpenCloseLock = new Semaphore(1);
 

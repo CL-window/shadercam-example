@@ -10,14 +10,41 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-    <Button
-        android:id="@+id/btn_record"
-        android:layout_width="125dp"
-        android:layout_height="60dp"
+    <ImageView
+        android:id="@+id/play_video"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="120dp"
+        android:src="@drawable/play"
+        android:visibility="gone"
+        />
+
+    <LinearLayout
+        android:id="@+id/control"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
-        android:text="Record"/>
+        >
+        <Button
+            android:id="@+id/btn_del"
+            android:layout_width="125dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="20dp"
+            android:text="del_last"/>
+        <Button
+            android:id="@+id/btn_record"
+            android:layout_width="125dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="20dp"
+            android:text="Record"/>
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="125dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="20dp"
+            android:text="save_all"/>
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn_swap_camera"
@@ -32,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:layout_above="@id/btn_record"
+        android:layout_above="@id/control"
         android:progress="50"
         android:max="100"
         android:padding="10dp"/>
