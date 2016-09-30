@@ -1,41 +1,17 @@
-// https://developer.android.com/samples/Camera2Video/project.html
-MediaRecorder 的使用，只可以录制一个文件，不可以暂停后接着录制
-// 设置 Audio资源 CAMCORDER 效果更好，假如没有，会默认使用 MIC
-mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.CAMCORDER);
-//mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-// video 资源  Using a Surface as video source. MediaRecorder#getSurface()
-mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.SURFACE);
-// 设置视频图像的录入源(从摄像头)
-// mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
-//  设置捕获(从摄像头)视频图像的预览界面
-// mMediaRecorder.setPreviewDisplay(Surface);
-//set output
-mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-// 输出的文件
-mMediaRecorder.setOutputFile(mNextVideoAbsolutePath);
-// video 相关设置 码率，帧率，大小，编码
-mMediaRecorder.setVideoEncodingBitRate(10000000);
-mMediaRecorder.setVideoFrameRate(30);
-mMediaRecorder.setVideoSize(mVideoSize.getWidth(), mVideoSize.getHeight());
-mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
-//setup audio
-mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
-mMediaRecorder.setAudioEncodingBitRate(44800);
-// 设置 方向
-int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
-private static final SparseIntArray DEFAULT_ORIENTATIONS = new SparseIntArray();
-private static final SparseIntArray INVERSE_ORIENTATIONS = new SparseIntArray();
-switch (mSensorOrientation) {
-    case SENSOR_ORIENTATION_DEFAULT_DEGREES:
-        mMediaRecorder.setOrientationHint(DEFAULT_ORIENTATIONS.get(rotation));
-        break;
-    case SENSOR_ORIENTATION_INVERSE_DEGREES:
-        mMediaRecorder.setOrientationHint(INVERSE_ORIENTATIONS.get(rotation));
-        break;
-}
-mMediaRecorder.prepare();
+CameraFragment.mMediaRecorder   用于录像+压缩编码，生成编码好的文件如mp4, 3gpp
+private MediaPlayer mMediaPlayer; // 用于播放压缩编码后的音视频文件
+打开摄像头啥的还是标准流程，
+CameraManager.openCamera(),然后预览时操作的对象都是CameraCaptureSession，获取不到data[]数据了
+变化的是 CameraRenderer Renderer这个类，
+虽然还是不太理解OpenGL,EGL 的博大精深，但是感觉照着这样一个套路使用，是可以实现效果的
+大致流程：
+1.初始化view,
+2.尝试打开相机CameraManager.openCamera()，
+3.打开相机成功，获得CameraDevice，尝试预览
+4.预览成功，获得CameraCaptureSession，设置重复预览
 
-// 视频的处理
+
+// 视频的处理，继续录制，删除前一段，合成全部视频
 com.googlecode.mp4parser.authoring.Movie 合并视频片段，实现接续录制
 
         if(mCacheFiles.size() == 1){

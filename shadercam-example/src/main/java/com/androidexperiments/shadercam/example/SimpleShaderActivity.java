@@ -557,6 +557,11 @@ public class SimpleShaderActivity extends FragmentActivity implements CameraRend
             result.addTrack(new AppendTrack(videoTracks.toArray(new Track[videoTracks.size()])));
         }
         Container out = new DefaultMp4Builder().build(result);
+        for (File file : mCacheFiles) {
+            if(file.exists()){
+                file.delete();
+            }
+        }
         mCacheFiles.clear();
         mCacheFiles.add(getVideoFile());
         FileChannel fc = new RandomAccessFile(mCacheFiles.get(0), "rw").getChannel();
